@@ -28,7 +28,7 @@ class Post(models.Model):
     )
 
     body = models.TextField(blank=True, default="")
-    link = models.FileField(upload_to="uploads", default="")
+    link = models.CharField(upload_to="uploads", default="", blank=True)
     tags = models.ManyToManyField(Tag, related_name="posts")
 
     image_link = models.CharField(max_length=255, blank=True)
