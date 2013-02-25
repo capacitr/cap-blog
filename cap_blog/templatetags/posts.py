@@ -2,7 +2,7 @@ from django import template
 
 register = template.Library()
 
-from blog.models import Post
+from cap_blog.models import Post
 
 @register.assignment_tag
 def get_posts_by_tag(tag_name=None):
