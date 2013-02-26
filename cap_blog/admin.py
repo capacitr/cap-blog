@@ -9,9 +9,29 @@ class TagAdmin(admin.ModelAdmin):
     class Meta:
         model = models.Tag
 
+class AttributeInline(admin.TabularInline):
+    class Meta:
+        model = models.Attribute
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'show_tags', 'publish']
+
+    list_display = ['date_created', 'title', 'order', 'author', 'date', 'publish']
+    list_editable = ['order', 'publish']
+
+    inlines = [AttributeInline,]
+
     prepopulated_fields = {'slug' : ('title',)}
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            try:
+                obj.author = request.user
+            except AttributeError:
+                pass
+
+        super(PostAdmin, self).save_model(request, obj, form, change)
+
 
     class Meta:
         model = models.Post

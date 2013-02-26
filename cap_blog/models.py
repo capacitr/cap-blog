@@ -11,8 +11,11 @@ class Tag(models.Model):
         return self.tag
 
 class Post(models.Model):
+    date_created = models.DateTimeField(auto_now_add=True)
 
+    author = models.ForeignKey('auth.User', editable=False)
     title = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
 
     image = EnhancedImageField(
@@ -34,6 +37,8 @@ class Post(models.Model):
     image_link = models.CharField(max_length=255, blank=True)
     date_time = models.CharField(max_length=255, blank=True)
 
+    order = models.IntegerField(default=0)
+
     publish = models.BooleanField(default=False)
 
     @property
@@ -46,4 +51,21 @@ class Post(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('blog_post', (), {'post_slug' : self.slug} )
+
+
+CHOICES = (
+    ('t', 'text'),
+    ('i', 'image')
+    ('f', 'file')
+    )
+
+class Attribute(models.Model):
+    post = models.ForeignKey('cap_blog.Post')
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+    value = models.CharField(max_length=255)
+    attribute_type = models.CharField(max_length=1, choices=CHOICES)
+
+    class Meta:
+        unique_together = ('post', 'slug')
 
