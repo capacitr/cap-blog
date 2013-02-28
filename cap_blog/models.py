@@ -15,7 +15,7 @@ class Post(models.Model):
 
     author = models.ForeignKey('auth.User', editable=False)
     title = models.CharField(max_length=255)
-    subtitle = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255, blank=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     image = EnhancedImageField(
@@ -37,7 +37,7 @@ class Post(models.Model):
     image_link = models.CharField(max_length=255, blank=True)
     date_time = models.CharField(max_length=255, blank=True)
 
-    order = models.IntegerField(default=0)
+    order = models.IntegerField(default=0, blank=True)
 
     publish = models.BooleanField(default=False)
 
