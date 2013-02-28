@@ -10,8 +10,7 @@ class TagAdmin(admin.ModelAdmin):
         model = models.Tag
 
 class AttributeInline(admin.TabularInline):
-    class Meta:
-        model = models.Attribute
+    model = models.Attribute
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'show_tags', 'publish']
