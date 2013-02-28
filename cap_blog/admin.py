@@ -16,7 +16,7 @@ class AttributeInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'show_tags', 'publish']
 
-    list_display = ['date_created', 'title', 'order', 'author', 'date', 'publish']
+    list_display = ['date_created', 'title', 'order', 'author', 'publish']
     list_editable = ['order', 'publish']
 
     inlines = [AttributeInline,]
