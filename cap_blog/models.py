@@ -55,7 +55,7 @@ class Post(models.Model):
 
 CHOICES = (
     ('t', 'text'),
-    ('i', 'image')
+    ('i', 'image'),
     ('f', 'file')
     )
 
