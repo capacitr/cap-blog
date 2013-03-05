@@ -55,3 +55,10 @@ def hyphenate(s, l):
     str_chunks = "".join(str_chunks)
     return str_chunks
 
+@register.assignment_tag
+def get_latest_post(tag_name=None):
+    try:
+        post = Post.objects.filter(tags__tag__in=[tag_name], publish=True)[0]
+    except IndexError:
+        post = None
+    return post
