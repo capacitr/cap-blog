@@ -9,13 +9,16 @@ class TagAdmin(admin.ModelAdmin):
     class Meta:
         model = models.Tag
 
+class ImageInline(admin.TabularInline):
+    model = models.Image
+
 class AttributeInline(admin.TabularInline):
     model = models.Attribute
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'show_tags', 'publish']
 
-    list_display = ['date_created', 'title', 'order', 'author', 'publish']
+    list_display = ['date_created', 'title', 'order', 'datetime', 'author', 'publish']
     list_editable = ['order', 'publish']
 
     inlines = [AttributeInline,]

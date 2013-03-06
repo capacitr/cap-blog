@@ -55,6 +55,21 @@ class Post(models.Model):
     class Meta:
         ordering = ["-date_created"]
 
+
+class Image(models.Model):
+    event = models.ForeignKey(Event)
+    image = EnhancedImageField(
+        upload_to = 'uploads',
+        process_source = dict(
+            size='600x400', sharpen=True, upscale=True, format='JPEG'),
+        thumbnails = {
+            'avatar': dict(size='280x108'),
+        },
+        blank=True
+    )
+
+
+
 CHOICES = (
     ('t', 'text'),
     ('i', 'image'),

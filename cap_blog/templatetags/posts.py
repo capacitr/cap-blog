@@ -59,3 +59,10 @@ def get_latest_post(tag_name=None):
     except IndexError:
         post = None
     return post
+
+@register.assignment_tag
+def get_upcoming_posts():
+    posts = Post.objects.filter(date__gte=datetime.datetime.now())
+    return posts 
+
+
