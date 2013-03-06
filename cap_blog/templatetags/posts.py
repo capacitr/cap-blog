@@ -10,11 +10,8 @@ def get_posts_by_tag(tag_name=None):
     return posts
 
 @register.assignment_tag
-def get_posts(post_types=None):
-    post_types = post_types.split(",")
-    posts = list(Post.objects.filter(post_type__in=post_types, publish=True))
-    return posts 
-
+def get_posts():
+    return Post.objects.filter(publish=True)
 
 @register.assignment_tag
 def get_prev_post(tag_name=None, pk=None):
