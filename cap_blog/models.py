@@ -52,6 +52,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         return ('blog_post', (), {'post_slug' : self.slug} )
 
+    class Meta:
+        ordering = ["-date_created"]
 
 CHOICES = (
     ('t', 'text'),
