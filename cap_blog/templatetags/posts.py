@@ -17,8 +17,8 @@ def get_posts(post_types=None):
 
 
 @register.assignment_tag
-def get_prev_post(post_type=None, pk=None):
-    posts = Post.objects.filter(post_type=post_type, publish=True)
+def get_prev_post(tag_name=None, pk=None):
+    posts = Post.objects.filter(tags__tag__in=[tag_name], publish=True)
     prev = None
     for post in posts:
         if post.pk == pk:
@@ -28,8 +28,8 @@ def get_prev_post(post_type=None, pk=None):
     return None
 
 @register.assignment_tag
-def get_next_post(post_type=None, pk=None):
-    posts = Post.objects.filter(post_type=post_type, publish=True)
+def get_next_post(tag_name=None, pk=None):
+    posts = Post.objects.filter(tags__tag__in=[tag_name], publish=True)
     prev = None
     for post in posts:
         if prev and prev.pk == pk:
